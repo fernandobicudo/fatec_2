@@ -121,22 +121,5 @@ public class TestaConexaoComDB {
 					"com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure\n" + 
 					"\nThe last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }

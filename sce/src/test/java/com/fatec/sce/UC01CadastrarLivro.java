@@ -1,6 +1,7 @@
 package com.fatec.sce;
 
 import static org.junit.Assert.*;
+import static com.fatec.sce.ObtemLivro.*;
 
 import org.junit.Test;
 
@@ -12,11 +13,9 @@ public class UC01CadastrarLivro {
 	public void CT01CadastrarLivroComDadosValidos() {
 		try {
 			// cenario
-			Livro umLivro = new Livro();
+			Livro umLivro;
 			// acao
-			umLivro.setIsbn("121212");
-			umLivro.setTitulo("Engenharia de Software");
-			umLivro.setAutor("Pressman");
+			umLivro = ObtemLivro.comDadosValidos();
 		} catch (RuntimeException e) {
 			// verificacao
 			fail("nao deve falhar");
@@ -26,13 +25,10 @@ public class UC01CadastrarLivro {
 	@Test
 	public void CT02cadastrarLivroComISBN_em_branco() {
 		// cenario
-		Livro livro = new Livro();
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
+		Livro livro;
 		try {
+			livro = ObtemLivro.comISBNInvalido_branco();
 			// acao
-			livro.setIsbn("");
-			fail("deveria lançar uma exceção");
 		} catch (RuntimeException e) {
 			// verificacao
 			assertEquals("ISBN invalido", e.getMessage());
@@ -42,12 +38,10 @@ public class UC01CadastrarLivro {
 	@Test
 	public void CT03cadastrarLivroComISBN_nulo() {
 		// cenario
-		Livro livro = new Livro();
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
+		Livro livro;
 		try {
 			// acao
-			livro.setIsbn(null);
+			livro = ObtemLivro.comISBNInvalido_nulo();
 			fail("deveria lançar uma exceção");
 		} catch (RuntimeException e) {
 			// verificacao
