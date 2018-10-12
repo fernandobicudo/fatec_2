@@ -21,6 +21,9 @@ public class Livro {
 	}
 
 	public void setTitulo(String titulo) {
+		if (titulo == "" | titulo == null) {
+			throw new RuntimeException("Titulo invalido");
+		}
 		this.titulo = titulo;
 	}
 
@@ -29,6 +32,10 @@ public class Livro {
 	}
 
 	public void setAutor(String autor) {
+		if (autor == "" | autor == null) {
+			throw new RuntimeException("Titulo invalido");
+		}
+
 		this.autor = autor;
 	}
 }
