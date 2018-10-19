@@ -26,6 +26,7 @@ public class Usuario {
 		this.nome = nome;
 	}
 
+	/*
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -47,4 +48,5 @@ public class Usuario {
 			return false;
 		return true;
 	}
+	*/
 }
