@@ -12,9 +12,10 @@ import com.fatec.sce.model.Livro;
 public class UC01CadastrarLivro {
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de dados válidos e cadastro com sucesso.
-	**/	
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de dados
+	 * válidos e cadastro com sucesso.
+	 **/
+
 	@Test
 	public void CT01CadastrarLivroComDadosValidos() {
 		try {
@@ -29,9 +30,10 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de ISBN em branco.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de ISBN em
+	 * branco.
+	 **/
+
 	@Test
 	public void CT02cadastrarLivroComISBN_em_branco() {
 		// cenario
@@ -46,9 +48,9 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de ISBN nulo.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de ISBN nulo.
+	 **/
+
 	@Test
 	public void CT03cadastrarLivroComISBN_nulo() {
 		// cenario
@@ -64,9 +66,10 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de Título em branco.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de Título em
+	 * branco.
+	 **/
+
 	@Test
 	public void CT04cadastrarLivroComTitulo_em_branco() {
 		// cenario
@@ -84,9 +87,9 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de Título nulo.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de Título nulo.
+	 **/
+
 	@Test
 	public void CT05cadastrarLivroComTitulo_nulo() {
 		// cenario
@@ -104,9 +107,10 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de Autor em branco.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de Autor em
+	 * branco.
+	 **/
+
 	@Test
 	public void CT06cadastrarLivroComAutor_em_branco() {
 		// cenario
@@ -124,9 +128,9 @@ public class UC01CadastrarLivro {
 	}
 
 	/**
-	* Objetivo - verificar o comportamento da aplicacao na inclusao de Autor nulo.
-	**/
-	
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de Autor nulo.
+	 **/
+
 	@Test
 	public void CT07cadastrarLivroComAutor_nulo() {
 		// cenario
@@ -141,58 +145,60 @@ public class UC01CadastrarLivro {
 			// verificacao
 			assertEquals("Titulo invalido", e.getMessage());
 		}
-		
-		
+
 	}
-	
+
 	@Test
-	public void CT11CadastrarLivro_com_sucesso(){
-	//cenario
-	Livro umLivro = ObtemLivro.comDadosValidos();
-	DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+	public void CT11CadastrarLivro_com_sucesso() {
+		// cenario
+		Livro umLivro = ObtemLivro.comDadosValidos();
+		DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
 		ILivroDAO livroDAO = mySQLFactory.getLivroDAO();
-	//acao
-	int codigoRetorno = livroDAO.adiciona(umLivro);
-	//verificacao
-	assertEquals(1,codigoRetorno);
-	livroDAO.exclui(umLivro.getIsbn());
+		// acao
+		int codigoRetorno = livroDAO.adiciona(umLivro);
+		// verificacao
+		assertEquals(1, codigoRetorno);
+		livroDAO.exclui(umLivro.getIsbn());
+	}
+
+	@Test
+	public void CT11CadastrarLivro_ISBN_ja_cadastrado() {
+		// cenario
+		Livro umLivro = ObtemLivro.comDadosValidos();
+		DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		ILivroDAO livroDAO = mySQLFactory.getLivroDAO();
+		// acao
+		try {
+			livroDAO.adiciona(umLivro);
+			livroDAO.adiciona(umLivro);
+		} catch (Exception e) {
+			livroDAO.exclui(umLivro.getIsbn());
+			assertEquals(e.getMessage(),
+					"com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '"
+							+ umLivro.getIsbn() + "' for key 'isbn'");
+		}
+
 	}
 }
-	/**
-
-	
-	@Test
-	public void CT08cadastrarLivro_com_sucesso() {
-		// cenario
-		Livro livro = new Livro();
-		livro.setIsbn("121212121");
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
-		assertEquals("Engenharia de Software", livro.getTitulo());
-	}
-	
-	
-	@Test
-	public void CT09cadastrarLivro_com_sucesso() {
-		// cenario
-		Livro livro = new Livro();
-		livro.setIsbn("121212121");
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
-		assertEquals("121212121", livro.getIsbn());
-	}
-
-
-	
-	@Test
-	public void CT10cadastrarLivro_com_sucesso() {
-		// cenario
-		Livro livro = new Livro();
-		livro.setIsbn("121212121");
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
-		assertEquals("Pressman", livro.getAutor());
-	}
-
-**/	
-
+/**
+ * 
+ * 
+ * @Test public void CT08cadastrarLivro_com_sucesso() { // cenario Livro livro =
+ *       new Livro(); livro.setIsbn("121212121"); livro.setTitulo("Engenharia de
+ *       Software"); livro.setAutor("Pressman"); assertEquals("Engenharia de
+ *       Software", livro.getTitulo()); }
+ * 
+ * 
+ * @Test public void CT09cadastrarLivro_com_sucesso() { // cenario Livro livro =
+ *       new Livro(); livro.setIsbn("121212121"); livro.setTitulo("Engenharia de
+ *       Software"); livro.setAutor("Pressman"); assertEquals("121212121",
+ *       livro.getIsbn()); }
+ * 
+ * 
+ * 
+ * @Test public void CT10cadastrarLivro_com_sucesso() { // cenario Livro livro =
+ *       new Livro(); livro.setIsbn("121212121"); livro.setTitulo("Engenharia de
+ *       Software"); livro.setAutor("Pressman"); assertEquals("Pressman",
+ *       livro.getAutor()); }
+ * 
+ **/
