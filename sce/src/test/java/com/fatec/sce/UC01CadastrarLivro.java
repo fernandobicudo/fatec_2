@@ -5,6 +5,8 @@ import static com.fatec.sce.ObtemLivro.*;
 
 import org.junit.Test;
 
+import com.fatec.sce.model.DAOFactory;
+import com.fatec.sce.model.ILivroDAO;
 import com.fatec.sce.model.Livro;
 
 public class UC01CadastrarLivro {
@@ -139,8 +141,23 @@ public class UC01CadastrarLivro {
 			// verificacao
 			assertEquals("Titulo invalido", e.getMessage());
 		}
+		
+		
 	}
-
+	
+	@Test
+	public void CT11CadastrarLivro_com_sucesso(){
+	//cenario
+	Livro umLivro = ObtemLivro.comDadosValidos();
+	DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		ILivroDAO livroDAO = mySQLFactory.getLivroDAO();
+	//acao
+	int codigoRetorno = livroDAO.adiciona(umLivro);
+	//verificacao
+	assertEquals(1,codigoRetorno);
+	livroDAO.exclui(umLivro.getIsbn());
+	}
+}
 	/**
 
 	
@@ -178,4 +195,4 @@ public class UC01CadastrarLivro {
 	}
 
 **/	
-}
+
