@@ -8,6 +8,8 @@ public abstract class DAOFactory {
 	public static final int SQLSERVER = 3;
 
 	public abstract LivroDAO getLivroDAO();
+	
+	public abstract UsuarioDAO getUsuarioDAO();
 
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		switch (whichFactory) {

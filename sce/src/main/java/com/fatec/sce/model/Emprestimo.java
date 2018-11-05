@@ -11,11 +11,20 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class Emprestimo {
+	private int emprestimoNumero;
 	private Livro livro;
 	private Usuario usuario;
 	private String dataEmprestimo;
 	private String dataDevolucao;
 
+	public int getEmprestimoNumero() {
+		return emprestimoNumero;
+	}
+
+	public void setEmprestimoNumero(int emprestimoNumero) {
+		this.emprestimoNumero = emprestimoNumero;
+	}
+	
 	public Livro getLivro() {
 		return livro;
 	}
@@ -24,7 +33,7 @@ public class Emprestimo {
 		if (livro != null) {
 			this.livro = livro;
 		} else {
-			throw new RuntimeException("Dados invalidos.");
+			throw new RuntimeException("Dados inválidos.");
 		}
 	}
 
@@ -36,7 +45,7 @@ public class Emprestimo {
 		if (usuario != null) {
 			this.usuario = usuario;
 		} else {
-			throw new RuntimeException("Dados invalidos.");
+			throw new RuntimeException("Dados inválidos.");
 		}
 
 	}
@@ -58,7 +67,7 @@ public class Emprestimo {
 	}
 
 	public void setDataDevolucao(String dataDevolucao) {
-		if (validaData(dataDevolucao)== true) {
+		if (validaData(dataDevolucao) == true) {
 			this.dataDevolucao = dataDevolucao;
 		} else {
 			throw new RuntimeException("Data invalida.");
@@ -82,5 +91,29 @@ public class Emprestimo {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Emprestimo other = (Emprestimo) obj;
+		if (livro == null) {
+			if (other.livro != null)
+				return false;
+		} else if (!livro.equals(other.livro))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
+
+	
 
 }

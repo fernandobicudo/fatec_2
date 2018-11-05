@@ -10,6 +10,7 @@ import com.fatec.sce.TestaConexaoComDB;
 import com.fatec.sce.UC01CadastrarLivro;
 import com.fatec.sce.UC02ConsultarLivro;
 import com.fatec.sce.UC05CadastrarUsuario;
+import com.fatec.sce.UC06ConsultarUsuario;
 import com.fatec.sce.UC09RegistrarEmprestimoDeLivro;
 
 @RunWith(Suite.class)
@@ -17,6 +18,7 @@ import com.fatec.sce.UC09RegistrarEmprestimoDeLivro;
 	UC01CadastrarLivro.class, 
 	UC02ConsultarLivro.class,
 	UC05CadastrarUsuario.class, 
+	UC06ConsultarUsuario.class,
 	UC09RegistrarEmprestimoDeLivro.class,
 	TestaConexaoComDB.class, 
 	})

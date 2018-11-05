@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.fatec.sce.model.DAOFactory;
+import com.fatec.sce.model.IUsuarioDAO;
 import com.fatec.sce.model.Usuario;
 
 public class UC05CadastrarUsuario {
@@ -104,6 +106,39 @@ public class UC05CadastrarUsuario {
 			assertEquals("Nome invalido", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void CT11CadastrarUsuario_com_sucesso() {
+		// cenario
+		Usuario umUsuario = ObtemUsuario.comDadosValidos();
+		DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		IUsuarioDAO usuarioDAO = mySQLFactory.getUsuarioDAO();
+		// acao
+		int codigoRetorno = usuarioDAO.adiciona(umUsuario);
+		// verificacao
+		assertEquals(1, codigoRetorno);
+		usuarioDAO.exclui(umUsuario.getRa());
+	}
+
+	@Test
+	public void CT11CadastrarUsuario_RA_ja_cadastrado() {
+		// cenario
+		Usuario umUsuario = ObtemUsuario.comDadosValidos();
+		DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+		IUsuarioDAO usuarioDAO = mySQLFactory.getUsuarioDAO();
+		// acao
+		try {
+			usuarioDAO.adiciona(umUsuario);
+			usuarioDAO.adiciona(umUsuario);
+		} catch (Exception e) {
+			usuarioDAO.exclui(umUsuario.getRa());
+			assertEquals(e.getMessage(),
+					"com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '"
+							+ umUsuario.getRa() + "' for key 'ra'");
+		}
+
+	}
+
 	
 	/**
 

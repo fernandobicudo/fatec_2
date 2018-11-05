@@ -11,4 +11,9 @@ public class MySQLDAOFactory extends DAOFactory {
 	public LivroDAO getLivroDAO() {
 		return new LivroDAO();
 	}
+	
+	@Override
+	public UsuarioDAO getUsuarioDAO() {
+		return new UsuarioDAO();
+	}
 }

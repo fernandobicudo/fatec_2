@@ -55,4 +55,130 @@ public class UC09RegistrarEmprestimoDeLivro {
 		// verificacao
 		assertTrue(dataEsperada.equals(dataObtida));
 	}
+
+
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
+	 * RA em branco.
+	 **/
+
+	@Test
+	public void CT02CadastrarEmprestimoComRaEmBranco() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+
+			// acao
+			emprestimo = ObtemEmprestimo.AlunocomRAInvalido_branco();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("RA invalido", e.getMessage());
+		}
+	}
+
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
+	 * RA nulo.
+	 **/
+
+	@Test
+	public void CT03CadastrarEmprestimoComRaNulo() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+
+			// acao
+			emprestimo = ObtemEmprestimo.AlunocomRAInvalido_nulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
+	 * nome em branco.
+	 **/
+
+	@Test
+	public void CT04CadastrarEmprestimoComNomeEmBranco() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.AlunocomNomeEmBranco();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
+	 * nome nulo.
+	 **/
+
+	@Test
+	public void CT05CadastrarEmprestimoComNomeNulo() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.AlunocomNomeNulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+	
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de livro com
+	 * ISBN nulo.
+	 **/
+
+	@Test
+	public void CT05CadastrarEmprestimocomISBNInvalido_nulo() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.comLivrocomISBNInvalido_nulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	/**
+	 * Objetivo - verificar o comportamento da aplicacao na inclusao de livro com
+	 * ISBN em branco.
+	 **/
+
+	@Test
+	public void CT05CadastrarEmprestimoComISBNemBranco() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.comLivrocomISBNInvalido_branco();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+		
+	
 }
