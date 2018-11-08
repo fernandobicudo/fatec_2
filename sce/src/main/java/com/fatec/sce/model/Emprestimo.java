@@ -11,7 +11,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 public class Emprestimo {
-	private int emprestimoNumero;
+	private Integer emprestimoNumero;
 	private Livro livro;
 	private Usuario usuario;
 	private String dataEmprestimo;
@@ -21,8 +21,12 @@ public class Emprestimo {
 		return emprestimoNumero;
 	}
 
-	public void setEmprestimoNumero(int emprestimoNumero) {
-		this.emprestimoNumero = emprestimoNumero;
+	public void setEmprestimoNumero(Integer emprestimoNumero) {
+		if (emprestimoNumero != null) {
+			this.emprestimoNumero = emprestimoNumero;
+		} else {
+			throw new RuntimeException("Dados inválidos.");
+		}
 	}
 	
 	public Livro getLivro() {
@@ -92,7 +96,7 @@ public class Emprestimo {
 		}
 	}
 
-	@Override
+/*	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -114,6 +118,6 @@ public class Emprestimo {
 		return true;
 	}
 
-	
+*/	
 
 }

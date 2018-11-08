@@ -39,8 +39,6 @@ public class Livro {
 		this.autor = autor;
 	}
 
-	
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -30,4 +30,9 @@ public class ObtemLivro {
 		livro.setAutor("Pressman");
 		return livro;
 	}
+	
+	public static Livro objetoNulo() {
+		Livro livro = new Livro();
+		return livro;
+	}
 }

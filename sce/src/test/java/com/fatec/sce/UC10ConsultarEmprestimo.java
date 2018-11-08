@@ -3,9 +3,9 @@ package com.fatec.sce;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
 import com.fatec.sce.model.DAOFactory;
 import com.fatec.sce.model.Emprestimo;
+import com.fatec.sce.model.IEmprestimoDAO;
 
 public class UC10ConsultarEmprestimo {
 
@@ -16,12 +16,12 @@ public class UC10ConsultarEmprestimo {
 		Emprestimo umEmprestimo = ObtemEmprestimo.comDadosValidos();
 		Emprestimo resultadoObtido = null;
 		DAOFactory mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-//		IUsuarioDAO usuarioDAO = mySQLFactory.getUsuarioDAO();
+		IEmprestimoDAO emprestimoDAO = mySQLFactory.getEmprestimoDAO();
 //acao
 		emprestimoDAO.adiciona(umEmprestimo);
-		resultadoObtido = emprestimoDAO.consulta(umUsuario.getRa());
+		resultadoObtido = emprestimoDAO.consulta(umEmprestimo.getEmprestimoNumero());
 //verificacao
-		assertTrue(resultadoObtido.equals(umUsuario));
-		emprestimoDAO.exclui(umUsuario.getRa());
+		assertTrue(resultadoObtido.equals(umEmprestimo));
+		emprestimoDAO.exclui(umEmprestimo.getEmprestimoNumero());
 	}
 }

@@ -45,4 +45,10 @@ public class ObtemUsuario {
 
 		return usuario;
 	}
+	
+	public static Usuario objetoNulo() {
+		Usuario usuario = new Usuario();
+		usuario = null;
+		return usuario;
+	}
 }

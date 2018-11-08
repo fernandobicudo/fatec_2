@@ -10,6 +10,8 @@ public abstract class DAOFactory {
 	public abstract LivroDAO getLivroDAO();
 	
 	public abstract UsuarioDAO getUsuarioDAO();
+	
+	public abstract EmprestimoDAO getEmprestimoDAO();
 
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		switch (whichFactory) {

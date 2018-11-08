@@ -28,7 +28,7 @@ public class UC09RegistrarEmprestimoDeLivro {
 		usuario.setNome("Jose da Silva");
 		servico = new ServicoEmprestimo();
 		// acao
-		Emprestimo resultadoEsperado = servico.empresta(livro, usuario);
+		Emprestimo resultadoEsperado = servico.empresta(123, livro, usuario);
 		// verificação
 		assertNotNull(resultadoEsperado);
 	}
@@ -56,7 +56,40 @@ public class UC09RegistrarEmprestimoDeLivro {
 		assertTrue(dataEsperada.equals(dataObtida));
 	}
 
+	@Test
+	public void CT02UC01FB_registra_emprestimo_com_data_emprestimo_invalida() {
+		// cenario
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("YYYY/MM/dd");
+		String dataEsperada = new DateTime().plusDays(8).toString(fmt);
+		ServicoEmprestimo servico = null;
+		Emprestimo emprestimo = new Emprestimo();
+		// acao
+		try {
+			emprestimo = ObtemEmprestimo.comDataEmprestimoInvalida();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			assertTrue(dataEsperada.equals(emprestimo.getDataEmprestimo()));
+		}
+		
+	}
 
+	@Test
+	public void CT02UC01FB_registra_emprestimo_com_data_devolucao_invalida() {
+		// cenario
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("YYYY/MM/dd");
+		String dataEsperada = new DateTime().plusDays(8).toString(fmt);
+		ServicoEmprestimo servico = null;
+		Emprestimo emprestimo = new Emprestimo();
+		// acao
+		try {
+			emprestimo = ObtemEmprestimo.comDataDevolucaoInvalida();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			assertTrue(dataEsperada.equals(emprestimo.getDataDevolucao()));
+		}
+		
+	}
+	
 	/**
 	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
 	 * RA em branco.
@@ -74,7 +107,7 @@ public class UC09RegistrarEmprestimoDeLivro {
 			fail("deveria lançar uma exceção");
 		} catch (RuntimeException e) {
 			// verificacao
-			assertEquals("RA invalido", e.getMessage());
+			assertEquals("Dados inválidos.", e.getMessage());
 		}
 	}
 
@@ -179,6 +212,66 @@ public class UC09RegistrarEmprestimoDeLivro {
 		}
 	}
 
+	@Test
+	public void CT05CadastrarEmprestimoComNumeroInvalido() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.comNumEmprestimoInvalido();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void CT05CadastrarEmprestimoComLivroNulo() {
+		// cenario
 		
+
+		try {
+			// acao
+			Emprestimo emprestimo = new Emprestimo();
+			emprestimo = ObtemEmprestimo.comLivroNulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void CT05CadastrarEmprestimoComUsuarioNulo() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.comUsuarioNulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
+	@Test
+	public void CT05CadastrarEmprestimoComTudoNulo() {
+		// cenario
+		Emprestimo emprestimo = new Emprestimo();
+
+		try {
+			// acao
+			emprestimo = ObtemEmprestimo.comTudoNulo();
+			fail("deveria lançar uma exceção");
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("Dados inválidos.", e.getMessage());
+		}
+	}
+
 	
 }
