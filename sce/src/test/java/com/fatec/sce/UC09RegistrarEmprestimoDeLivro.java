@@ -70,7 +70,7 @@ public class UC09RegistrarEmprestimoDeLivro {
 		} catch (RuntimeException e) {
 			assertTrue(dataEsperada.equals(emprestimo.getDataEmprestimo()));
 		}
-		
+
 	}
 
 	@Test
@@ -87,9 +87,9 @@ public class UC09RegistrarEmprestimoDeLivro {
 		} catch (RuntimeException e) {
 			assertTrue(dataEsperada.equals(emprestimo.getDataDevolucao()));
 		}
-		
+
 	}
-	
+
 	/**
 	 * Objetivo - verificar o comportamento da aplicacao na inclusao de usuario com
 	 * RA em branco.
@@ -171,7 +171,7 @@ public class UC09RegistrarEmprestimoDeLivro {
 			assertEquals("Dados inválidos.", e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Objetivo - verificar o comportamento da aplicacao na inclusao de livro com
 	 * ISBN nulo.
@@ -230,7 +230,6 @@ public class UC09RegistrarEmprestimoDeLivro {
 	@Test
 	public void CT05CadastrarEmprestimoComLivroNulo() {
 		// cenario
-		
 
 		try {
 			// acao
@@ -273,5 +272,29 @@ public class UC09RegistrarEmprestimoDeLivro {
 		}
 	}
 
-	
+	/**
+	 * Objetivo - verificar o comportamento do metodo ehDomigo() para uma data com
+	 * formato valido dia invalido (domingo).
+	 */
+	@Test
+	public void CT06se_data_devolucao_for_domingo_retorna_true() {
+		// cenario
+		String data = "2018/09/02"; // domingo
+		// acao
+		Emprestimo umEmprestimo = new Emprestimo();
+		// verificacao
+		assertTrue(umEmprestimo.ehDomingo(data));
+	}
+
+	@Test
+	public void CT07_quando_entrega_atrasado_quant_dias_negativo() {
+		// cenario
+		Emprestimo umEmprestimo = ObtemEmprestimo.comDataDeDevolucaoVencida();
+		ServicoEmprestimo servico = new ServicoEmprestimo();
+		// acao
+		int quantDias = servico.devolucao(umEmprestimo);
+		// verificacao
+		assertTrue(quantDias < 0); // quant de dias entre a data de emprestimo e a de devolucao
+	}
+
 }

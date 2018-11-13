@@ -1,5 +1,9 @@
 package com.fatec.sce;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import com.fatec.sce.model.Emprestimo;
 import com.fatec.sce.model.Livro;
 import com.fatec.sce.model.Usuario;
@@ -15,31 +19,44 @@ public class ObtemEmprestimo {
 	}
 
 	public static Emprestimo comDataEmprestimoInvalida() {
-		
+
 		Emprestimo emprestimo = new Emprestimo();
 		Livro livro = ObtemLivro.comDadosValidos();
 		Usuario aluno = ObtemUsuario.comDadosValidos();
 		ServicoEmprestimo servico = new ServicoEmprestimo();
 		emprestimo = servico.empresta(2, livro, aluno);
-		
+
 		emprestimo.setDataEmprestimo("2018-13-32");
-		
+
 		return emprestimo;
 	}
-	
-public static Emprestimo comDataDevolucaoInvalida() {
-		
+
+	public static Emprestimo comDataDeDevolucaoVencida() {
+		Livro livro = ObtemLivro.comDadosValidos();
+		Usuario aluno = ObtemUsuario.comDadosValidos();
+		ServicoEmprestimo servico = new ServicoEmprestimo();
+		int numeroEmprestimo = 2;
+		Emprestimo umEmprestimo = servico.empresta(numeroEmprestimo, livro, aluno);
+		DateTime dataAtual = new DateTime();
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("YYYY/MM/dd");
+		umEmprestimo.setDataEmprestimo(dataAtual.minusDays(12).toString(fmt));
+		umEmprestimo.setDataDevolucao(dataAtual.minusDays(4).toString(fmt));
+		return umEmprestimo;
+	}
+
+	public static Emprestimo comDataDevolucaoInvalida() {
+
 		Emprestimo emprestimo = new Emprestimo();
 		Livro livro = ObtemLivro.comDadosValidos();
 		Usuario aluno = ObtemUsuario.comDadosValidos();
 		ServicoEmprestimo servico = new ServicoEmprestimo();
 		emprestimo = servico.empresta(2, livro, aluno);
-		
+
 		emprestimo.setDataDevolucao("2018-13-32");
-		
+
 		return emprestimo;
 	}
-	
+
 	public static Emprestimo AlunocomRAInvalido_nulo() {
 		Livro livro = ObtemLivro.comDadosValidos();
 		Usuario aluno = ObtemUsuario.comRAInvalido_nulo();
@@ -81,14 +98,14 @@ public static Emprestimo comDataDevolucaoInvalida() {
 		ServicoEmprestimo servico = new ServicoEmprestimo();
 		return servico.empresta(8, livro, aluno);
 	}
-	
+
 	public static Emprestimo comNumEmprestimoInvalido() {
 		Livro livro = ObtemLivro.comDadosValidos();
 		Usuario aluno = ObtemUsuario.comDadosValidos();
 		ServicoEmprestimo servico = new ServicoEmprestimo();
 		return servico.empresta(null, livro, aluno);
 	}
-	
+
 	public static Emprestimo comLivroNulo() {
 		Livro livro = ObtemLivro.objetoNulo();
 		Usuario aluno = ObtemUsuario.comDadosValidos();
@@ -110,5 +127,4 @@ public static Emprestimo comDataDevolucaoInvalida() {
 		return servico.empresta(8, livro, aluno);
 	}
 
-	
 }

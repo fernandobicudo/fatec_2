@@ -28,7 +28,7 @@ public class Emprestimo {
 			throw new RuntimeException("Dados inválidos.");
 		}
 	}
-	
+
 	public Livro getLivro() {
 		return livro;
 	}
@@ -96,28 +96,24 @@ public class Emprestimo {
 		}
 	}
 
-/*	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Emprestimo other = (Emprestimo) obj;
-		if (livro == null) {
-			if (other.livro != null)
-				return false;
-		} else if (!livro.equals(other.livro))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
-		return true;
+	/*
+	 * @Override public boolean equals(Object obj) { if (this == obj) return true;
+	 * if (obj == null) return false; if (getClass() != obj.getClass()) return
+	 * false; Emprestimo other = (Emprestimo) obj; if (livro == null) { if
+	 * (other.livro != null) return false; } else if (!livro.equals(other.livro))
+	 * return false; if (usuario == null) { if (other.usuario != null) return false;
+	 * } else if (!usuario.equals(other.usuario)) return false; return true; }
+	 * 
+	 */
+	public boolean ehDomingo(String data) {
+		boolean isValida = false;
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
+		if (validaData(data) == true) {
+			DateTime umaData = fmt.parseDateTime(data);
+			if (umaData.dayOfWeek().getAsText().equals("Domingo")) {
+				isValida = true;
+			}
+		}
+		return isValida;
 	}
-
-*/	
-
 }
